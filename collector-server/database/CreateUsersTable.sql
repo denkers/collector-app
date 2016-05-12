@@ -5,5 +5,5 @@ CREATE TABLE users
 	email VARCHAR(100) NOT NULL,
 	picture VARCHAR(255) DEFAULT 'i.imgur.com/N6XWLsy.png',
 	register_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-	acc_type SMALLINT DEFAULT 0
+	country varchar(35),
 );

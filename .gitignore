@@ -4,3 +4,4 @@
 /collector-server/dist/
 /collector-server/collector-server-war/dist/
 /collector-server/collector-server-ejb/dist/
+*.swp
