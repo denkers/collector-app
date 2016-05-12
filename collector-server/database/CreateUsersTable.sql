@@ -6,4 +6,5 @@ CREATE TABLE users
 	picture VARCHAR(255) DEFAULT 'i.imgur.com/N6XWLsy.png',
 	register_date DATETIME DEFAULT CURRENT_TIMESTAMP,
 	country varchar(35),
+	points INT DEFAULT 0
 );
