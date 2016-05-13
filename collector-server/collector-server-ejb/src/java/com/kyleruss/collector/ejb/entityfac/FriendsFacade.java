@@ -1,7 +1,7 @@
 //=========================================
 //  KYLE RUSSELL
 //  AUT UNIVERSITY 2016
-//  https://github.com/denkers/jforum
+//  https://github.com/denkers/collector-app
 //=========================================
 
 package com.kyleruss.collector.ejb.entityfac;
@@ -103,7 +103,10 @@ public class FriendsFacade extends AbstractFacade<Friends>
             
             else
             {
-                Friends newFriendship   =   new Friends(user, friend);
+                Friends newFriendship   =   new Friends();
+                newFriendship.setUsers(user);
+                newFriendship.setUsers1(friend);
+                
                 create(newFriendship);
                 result      =   em.contains(newFriendship);
                 response    =   result? "Successfully added friend" : "Failed to add friend";   
