@@ -1,0 +1,8 @@
+CREATE TABLE decks
+(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(30),
+	description VARCHAR(80),
+	owner VARCHAR(16) NOT NULL,
+	FOREIGN KEY (owner) REFERENCES users(username) ON DELETE CASCADE	
+);

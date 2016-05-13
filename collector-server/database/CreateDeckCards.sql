@@ -1,0 +1,9 @@
+CREATE TABLE deck_cards
+(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	card_id INT NOT NULL,
+	deck_id INT NOT NULL,
+	deck_pos INT,
+	FOREIGN KEY(card_id) REFERENCES cards(id) ON DELETE CASCADE,
+	FOREIGN KEY(deck_id) REFERENCES decks(id) ON DELETE CASCADE
+);
