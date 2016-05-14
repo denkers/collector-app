@@ -104,8 +104,8 @@ public class FriendsFacade extends AbstractFacade<Friends>
             else
             {
                 Friends newFriendship   =   new Friends();
-                newFriendship.setUsers(user);
-                newFriendship.setUsers1(friend);
+                newFriendship.setUserA(user);
+                newFriendship.setUserB(friend);
                 
                 create(newFriendship);
                 result      =   em.contains(newFriendship);
