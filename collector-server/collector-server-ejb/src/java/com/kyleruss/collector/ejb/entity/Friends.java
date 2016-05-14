@@ -40,11 +40,11 @@ public class Friends implements Serializable
     
     @JoinColumn(name = "friend_a", referencedColumnName = "username")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Users users;
+    private Users userA;
     
     @JoinColumn(name = "friend_b", referencedColumnName = "username")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Users users1;
+    private Users userB;
 
     public Friends() {}
 
@@ -83,24 +83,24 @@ public class Friends implements Serializable
         this.friendshipDate = friendshipDate;
     }
 
-    public Users getUsers() 
+    public Users getUserA() 
     {
-        return users;
+        return userA;
     }
 
-    public void setUsers(Users users) 
+    public void setUserA(Users user) 
     {
-        this.users = users;
+        this.userA  =   user;
     }
 
-    public Users getUsers1() 
+    public Users getUserB() 
     {
-        return users1;
+        return userB;
     }
 
-    public void setUsers1(Users users1) 
+    public void setUserB(Users user) 
     {
-        this.users1 = users1;
+        this.userB  =   user;
     }
 
     @Override
@@ -127,4 +127,16 @@ public class Friends implements Serializable
         return "com.kyleruss.collector.ejb.entity.Friends[ id=" + id + " ]";
     }
     
+    public boolean isFriends(Users user)
+    {
+        return userA.equals(user) || userB.equals(user);
+    }
+    
+    public Users getFriend(Users user)
+    {
+        if(userA.equals(user))
+            return userB;
+        
+        return userA;
+    }
 }
