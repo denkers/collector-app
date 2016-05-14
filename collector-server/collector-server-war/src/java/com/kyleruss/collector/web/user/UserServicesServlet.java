@@ -6,9 +6,13 @@
 
 package com.kyleruss.collector.web.user;
 
+import com.kyleruss.collector.ejb.entity.Users;
+import com.kyleruss.collector.ejb.entityfac.ActiveUserBean;
+import com.kyleruss.collector.ejb.entityfac.UsersFacade;
 import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.Map;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +22,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "UserServicesServlet", urlPatterns = {"/user/login", "/user/register"})
 public class UserServicesServlet extends HttpServlet
 {
+    @EJB
+    private UsersFacade usersBean;
+    
+    @EJB
+    private ActiveUserBean activeUserBean;
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
