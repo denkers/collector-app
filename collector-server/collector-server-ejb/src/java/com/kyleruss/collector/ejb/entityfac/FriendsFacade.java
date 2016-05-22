@@ -24,7 +24,7 @@ import javax.persistence.criteria.Root;
 @LocalBean
 public class FriendsFacade extends AbstractFacade<Friends> 
 {
-    @PersistenceContext(unitName = "jforum-ejbPU")
+    @PersistenceContext(unitName = "collector-server-ejbPU")
     private EntityManager em;
     
     public FriendsFacade() 

@@ -5,3 +5,6 @@
 /collector-server/collector-server-war/dist/
 /collector-server/collector-server-ejb/dist/
 *.swp
+/collector-server/collector-server-ejb/build/
+/collector-server/collector-server-war/build/
+/collector-server/build/

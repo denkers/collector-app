@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
 @LocalBean
 public class UsersFacade extends AbstractFacade<Users> 
 {
-    @PersistenceContext(unitName = "jforum-ejbPU")
+    @PersistenceContext(unitName = "collector-server-ejbPU")
     private EntityManager em;
     
     public UsersFacade() 

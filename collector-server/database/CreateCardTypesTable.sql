@@ -1,0 +1,6 @@
+CREATE TABLE card_types
+(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(35),
+	description VARCHAR(100)
+);
