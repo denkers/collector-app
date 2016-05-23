@@ -63,10 +63,10 @@ public class Users implements Serializable
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users", fetch = FetchType.LAZY)
     private List<Decks> decksList;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userA", fetch = FetchType.LAZY)
     private List<Friends> friendsList;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users1", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userB", fetch = FetchType.LAZY)
     private List<Friends> friendsList1;
 
     public Users() {}
