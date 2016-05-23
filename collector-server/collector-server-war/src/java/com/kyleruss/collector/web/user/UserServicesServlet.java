@@ -44,6 +44,7 @@ public class UserServicesServlet extends HttpServlet
         
         Map.Entry<Boolean, String> result   =   new AbstractMap.SimpleEntry(attempt.getKey() != null, attempt.getValue());   
         //send result
+        
     }
     
     private void postRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

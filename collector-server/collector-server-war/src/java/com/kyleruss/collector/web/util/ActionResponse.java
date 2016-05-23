@@ -6,6 +6,8 @@
 
 package com.kyleruss.collector.web.util;
 
+import com.google.gson.Gson;
+
 public class ActionResponse 
 {
     private String message;
@@ -59,5 +61,11 @@ public class ActionResponse
     public void setData(Object data)
     {
         this.data = data;
+    }
+    
+    public String toJSON()
+    {
+        Gson gObj   =   new Gson();
+        return gObj.toJson(this);
     }
 }
