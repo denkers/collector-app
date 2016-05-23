@@ -31,7 +31,6 @@ public class UserServicesServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        
     }
     
     private void postLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
