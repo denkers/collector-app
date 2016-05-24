@@ -1,12 +1,10 @@
 //=========================================
 //  KYLE RUSSELL
 //  AUT UNIVERSITY 2016
-//  https://github.com/denkers/jforum
+//  https://github.com/denkers/collector-app
 //=========================================
 
 package com.kyleruss.collector.web.util;
-
-import com.google.gson.Gson;
 
 public class ActionResponse 
 {
