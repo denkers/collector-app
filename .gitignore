@@ -8,3 +8,4 @@
 /collector-server/collector-server-ejb/build/
 /collector-server/collector-server-war/build/
 /collector-server/build/
+/collector-server/collector-server-war/web/test/

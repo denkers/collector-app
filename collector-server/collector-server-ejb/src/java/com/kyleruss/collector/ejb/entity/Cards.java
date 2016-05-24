@@ -35,10 +35,6 @@ public class Cards implements Serializable
     @Column(name = "name")
     private String name;
     
-    @Size(max = 100)
-    @Column(name = "description")
-    private String description;
-    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -79,16 +75,6 @@ public class Cards implements Serializable
     public void setName(String name) 
     {
         this.name = name;
-    }
-
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void setDescription(String description) 
-    {
-        this.description = description;
     }
 
     public String getPicture()

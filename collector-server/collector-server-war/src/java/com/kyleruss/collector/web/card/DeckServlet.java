@@ -14,6 +14,7 @@ import com.kyleruss.collector.ejb.entityfac.ActiveUserBean;
 import com.kyleruss.collector.ejb.entityfac.CardsFacade;
 import com.kyleruss.collector.ejb.entityfac.DeckCardsFacade;
 import com.kyleruss.collector.ejb.entityfac.DecksFacade;
+import com.kyleruss.collector.ejb.entityfac.UsersFacade;
 import com.kyleruss.collector.ejb.util.ValidationUtils;
 import com.kyleruss.collector.web.util.ActionResponse;
 import com.kyleruss.collector.web.util.ServletUtils;
@@ -27,7 +28,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "DeckServlet", urlPatterns = {"/deck/list", "/deck/find", "/deck/edit", "/deck/remove", "/deck/add", "/deck/list/add"})
+@WebServlet(name = "DeckServlet", urlPatterns = {"/deck/list", "/deck/find", "/deck/edit", "/deck/remove", "/deck/add", "/deck/cards/add"})
 public class DeckServlet extends HttpServlet 
 {
     
@@ -38,6 +39,8 @@ public class DeckServlet extends HttpServlet
     @EJB DecksFacade decksFacade;
     
     @EJB ActiveUserBean activeUserBean;
+    
+    @EJB UsersFacade usersBean;
     
     /**
      * @param request servlet request
@@ -52,13 +55,13 @@ public class DeckServlet extends HttpServlet
         if(path.equals("/deck/list"))
             getDeckList(request, response);
         
-        else if(path.equals("/deck"))
+        else if(path.equals("/deck/find"))
             getDeck(request, response);
     }
     
     private void getDeckList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        Users activeUser    =   activeUserBean.getActiveUser();
+        Users activeUser    =   usersBean.find(request.getParameter("user"));//activeUserBean.getActiveUser();
         List<Decks> decks   =   decksFacade.getDecksForUser(activeUser);
         ServletUtils.jsonResponse(response, decks);
     }
@@ -92,7 +95,7 @@ public class DeckServlet extends HttpServlet
             case "/deck/remove":
                 removeDeck(request, response);
                 break;
-            case "/deck/list/add":
+            case "/deck/cards/add":
                 addCardsToDeck(request, response);
                 break;
             default:
@@ -118,6 +121,10 @@ public class DeckServlet extends HttpServlet
         {
             deck.setName(deckName);
             deck.setDescription(deckDesc);
+            decksFacade.edit(deck);
+            
+            acResponse.setActionStatus(true);
+            acResponse.setMessage("Successfully saved changes to deck");
         }
         
         ServletUtils.jsonResponse(response, acResponse);
@@ -130,13 +137,14 @@ public class DeckServlet extends HttpServlet
         ActionResponse acResponse   =   new ActionResponse();
         
         if(!activeUserBean.isActive())
-            acResponse.setMessage("You must be logged in to create a deck");
-        else if(!ValidationUtils.isNotNull(deckName, deckDesc) || ValidationUtils.isInRange(deckName, 1, 20)
-                || ValidationUtils.isInRange(deckDesc, 1, 100))
+            acResponse.setMessage("You must be logged in to create a deck"); 
+        else if(!ValidationUtils.isNotNull(deckName, deckDesc) || !ValidationUtils.isInRange(deckName, 1, 20) 
+                || !ValidationUtils.isInRange(deckDesc, 1, 100))
             acResponse.setMessage("Invalid info entered");
         else
         {
-            boolean result  =   decksFacade.addDeck(deckName, deckDesc, activeUserBean.getActiveUser());
+            Users user  =   usersBean.find("kyleruss");
+            boolean result  =   decksFacade.addDeck(deckName, deckDesc, user);//activeUserBean.getActiveUser());
             acResponse.setActionStatus(result);
             acResponse.setMessage(result? "Successfully added deck" : "Failed to add the deck");
         }
@@ -174,18 +182,18 @@ public class DeckServlet extends HttpServlet
         String cardListParam        =   request.getParameter("deck_cards");
         int deckID                  =   Integer.parseInt(request.getParameter("deck_id"));
         Gson gson                   =   new Gson();
-        List<Integer> cardIDList    =   gson.fromJson(cardListParam, List.class);
+        String[] cardIDList         =   gson.fromJson(cardListParam, String[].class);
         List<Cards> cardList        =   new ArrayList<>();
         
-        for(int cardID : cardIDList)
+        for(String cardID : cardIDList)
         {
-            Cards card  =   cardsFacade.find(cardID);
+            Cards card  =   cardsFacade.find(Integer.parseInt(cardID));
             cardList.add(card);
         }
         
         Decks deck      =   decksFacade.find(deckID);
         boolean result  =   deckCardsFacade.addCardsToDeck(deck, cardList);
-        String message  =   "";
+        String message;
 
         if(result)
             message =   "Successfully added cards to deck";
