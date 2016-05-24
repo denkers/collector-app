@@ -11,6 +11,8 @@ import com.kyleruss.collector.ejb.entity.Users;
 import com.kyleruss.collector.ejb.entityfac.ActiveUserBean;
 import com.kyleruss.collector.ejb.entityfac.FriendsFacade;
 import com.kyleruss.collector.ejb.entityfac.UsersFacade;
+import com.kyleruss.collector.web.util.ActionResponse;
+import com.kyleruss.collector.web.util.ServletUtils;
 import java.io.IOException;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
@@ -84,8 +86,7 @@ public class FriendsServlet extends HttpServlet
                 result  =   new SimpleEntry(false, "Invalid input");
             }
 
-            request.setAttribute("profileResult", result);
-            request.getRequestDispatcher("/user/profile/info").forward(request, response);
+            ServletUtils.jsonResponse(response, new ActionResponse(result.getValue(), result.getKey()));
         }
     }
     
@@ -105,8 +106,7 @@ public class FriendsServlet extends HttpServlet
             Users user                      =   activeUserBean.getActiveUser();
             Entry<Boolean, String> result   =   friendsBean.addFriend(user, friend);
             
-            request.setAttribute("profileResult", result);
-            request.getRequestDispatcher("/user/profile/info").forward(request, response);
+            ServletUtils.jsonResponse(response, new ActionResponse(result.getValue(), result.getKey()));
         } 
     }
 }

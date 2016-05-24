@@ -6,8 +6,6 @@
 
 package com.kyleruss.collector.web.user;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.kyleruss.collector.ejb.entity.Friends;
 import com.kyleruss.collector.ejb.entity.Users;
 import com.kyleruss.collector.ejb.entityfac.ActiveUserBean;
