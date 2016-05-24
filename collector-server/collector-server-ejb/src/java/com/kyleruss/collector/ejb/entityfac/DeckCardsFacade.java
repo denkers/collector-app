@@ -8,6 +8,7 @@ package com.kyleruss.collector.ejb.entityfac;
 import com.kyleruss.collector.ejb.entity.Cards;
 import com.kyleruss.collector.ejb.entity.DeckCards;
 import com.kyleruss.collector.ejb.entity.Decks;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -34,7 +35,7 @@ public class DeckCardsFacade extends AbstractFacade<DeckCards> {
         super(DeckCards.class);
     }
     
-    public boolean addCardsToDeck(Decks deck, Cards... cards)
+    public boolean addCardsToDeck(Decks deck, List<Cards> cards)
     {
         boolean status  =   true;
         EntityTransaction transaction   =   em.getTransaction();

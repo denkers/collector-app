@@ -8,8 +8,13 @@ package com.kyleruss.collector.web.card;
 
 import com.google.gson.Gson;
 import com.kyleruss.collector.ejb.entity.Cards;
+import com.kyleruss.collector.ejb.entity.Decks;
+import com.kyleruss.collector.ejb.entityfac.ActiveUserBean;
 import com.kyleruss.collector.ejb.entityfac.CardsFacade;
 import com.kyleruss.collector.ejb.entityfac.DeckCardsFacade;
+import com.kyleruss.collector.ejb.entityfac.DecksFacade;
+import com.kyleruss.collector.web.util.ActionResponse;
+import com.kyleruss.collector.web.util.ServletUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,9 @@ public class DeckServlet extends HttpServlet
     
     @EJB CardsFacade cardsFacade;
     
+    @EJB DecksFacade decksFacade;
+    
+    @EJB ActiveUserBean activeUserBean;
     
     /**
      * @param request servlet request
@@ -48,6 +56,9 @@ public class DeckServlet extends HttpServlet
     
     private void getDeck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
+        int deckID  =   Integer.parseInt(request.getParameter("deck_id"));
+        Decks deck  =   decksFacade.find(deckID);
+        
         
     }
 
@@ -92,5 +103,15 @@ public class DeckServlet extends HttpServlet
             cardList.add(card);
         }
         
+        Decks deck      =   decksFacade.find(deckID);
+        boolean result  =   deckCardsFacade.addCardsToDeck(deck, cardList);
+        String message  =   "";
+
+        if(result)
+            message =   "Successfully added cards to deck";
+        else
+            message =   "Failed to add cards to the deck";
+        
+        ServletUtils.jsonResponse(response, new ActionResponse(message, result));
     }
 }
