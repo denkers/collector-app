@@ -123,7 +123,27 @@ public class DeckServlet extends HttpServlet
     
     private void removeDeck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
+        int deckID                  =   Integer.parseInt(request.getParameter("deck_id"));
+        Decks deck                  =   decksFacade.find(deckID);
+        ActionResponse acResponse   =   new ActionResponse();   
         
+        if(!activeUserBean.isActive())
+            acResponse.setMessage("You must be logged in to remove a deck");
+        
+        else if(deck == null)
+            acResponse.setMessage("Deck was not found");
+        
+        else if(!deck.getUsers().equals(activeUserBean.getActiveUser()))
+            acResponse.setMessage("You do not have permission to remove this deck");
+        
+        else
+        {
+            boolean result  =   decksFacade.removeDeck(deck);
+            acResponse.setActionStatus(result);
+            acResponse.setMessage(result? "Successfully removed deck" : "Failed to remove deck");
+        }
+        
+        ServletUtils.jsonResponse(response, acResponse);
     }
     
     private void addCardsToDeck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 

@@ -62,4 +62,10 @@ public class DecksFacade extends AbstractFacade<Decks>
         create(deck);
         return em.contains(deck);
     }
+    
+    public boolean removeDeck(Decks deck)
+    {
+        remove(deck);
+        return !em.contains(deck);
+    }
 }
