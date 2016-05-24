@@ -38,7 +38,6 @@ public class DeckCardsFacade extends AbstractFacade<DeckCards> {
     public boolean addCardsToDeck(Decks deck, List<Cards> cards)
     {
         boolean status  =   true;
-        EntityTransaction transaction   =   em.getTransaction();
         
         for(Cards card : cards)
         {
@@ -53,11 +52,6 @@ public class DeckCardsFacade extends AbstractFacade<DeckCards> {
                 break;
             }
         }
-        
-        if(status)
-            transaction.commit();
-        else
-            transaction.rollback();
         
         return status;
     }
