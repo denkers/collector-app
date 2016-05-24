@@ -14,6 +14,7 @@ import com.kyleruss.collector.ejb.entityfac.ActiveUserBean;
 import com.kyleruss.collector.ejb.entityfac.CardsFacade;
 import com.kyleruss.collector.ejb.entityfac.DeckCardsFacade;
 import com.kyleruss.collector.ejb.entityfac.DecksFacade;
+import com.kyleruss.collector.ejb.util.ValidationUtils;
 import com.kyleruss.collector.web.util.ActionResponse;
 import com.kyleruss.collector.web.util.ServletUtils;
 import java.io.IOException;
@@ -78,12 +79,46 @@ public class DeckServlet extends HttpServlet
     
     private void editDeck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
+        int deckID                  =   Integer.parseInt(request.getParameter("deck_id"));
+        String deckName             =   request.getParameter("deck_name");
+        String deckDesc             =   request.getParameter("deck_desc");
+        ActionResponse acResponse   =   new ActionResponse();   
         
+        Decks deck                  =   decksFacade.find(deckID);
+        if(deck == null)
+            acResponse.setMessage("Deck was not found");
+        
+        else if(!deck.getUsers().equals(activeUserBean.getActiveUser()))
+            acResponse.setMessage("You don't have permission to edit this deck");
+        
+        else
+        {
+            deck.setName(deckName);
+            deck.setDescription(deckDesc);
+        }
+        
+        ServletUtils.jsonResponse(response, acResponse);
     }
     
     private void addDeck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
+        String deckName             =   request.getParameter("deck_name");
+        String deckDesc             =   request.getParameter("deck_desc");
+        ActionResponse acResponse   =   new ActionResponse();
         
+        if(!activeUserBean.isActive())
+            acResponse.setMessage("You must be logged in to create a deck");
+        else if(!ValidationUtils.isNotNull(deckName, deckDesc) || ValidationUtils.isInRange(deckName, 1, 20)
+                || ValidationUtils.isInRange(deckDesc, 1, 100))
+            acResponse.setMessage("Invalid info entered");
+        else
+        {
+            boolean result  =   decksFacade.addDeck(deckName, deckDesc, activeUserBean.getActiveUser());
+            acResponse.setActionStatus(result);
+            acResponse.setMessage(result? "Successfully added deck" : "Failed to add the deck");
+        }
+        
+        ServletUtils.jsonResponse(response, acResponse);
     }
     
     private void removeDeck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 

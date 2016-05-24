@@ -51,4 +51,15 @@ public class DecksFacade extends AbstractFacade<Decks>
             return null;
         }
     }
+    
+    public boolean addDeck(String name, String description, Users user)
+    {
+        Decks deck  =   new Decks();
+        deck.setName(name);
+        deck.setDescription(description);
+        deck.setUsers(user);
+        
+        create(deck);
+        return em.contains(deck);
+    }
 }
