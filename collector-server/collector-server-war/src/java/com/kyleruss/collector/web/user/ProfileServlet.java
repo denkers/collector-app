@@ -6,15 +6,21 @@
 
 package com.kyleruss.collector.web.user;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.kyleruss.collector.ejb.entity.Friends;
 import com.kyleruss.collector.ejb.entity.Users;
 import com.kyleruss.collector.ejb.entityfac.ActiveUserBean;
 import com.kyleruss.collector.ejb.entityfac.FriendsFacade;
 import com.kyleruss.collector.ejb.entityfac.UsersFacade;
 import com.kyleruss.collector.ejb.util.ValidationUtils;
+import com.kyleruss.collector.web.util.ActionResponse;
+import com.kyleruss.collector.web.util.ServletUtils;
 import java.io.IOException;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -87,8 +93,11 @@ public class ProfileServlet extends HttpServlet
         if(!ownProfile)
             friendship  =   friendsBean.getFriendship(activeUserBean.getActiveUser(), reqUser);
         
-        request.setAttribute("friendship", friendship);
-        request.getRequestDispatcher("/views/user/profile/info.jsp").forward(request, response);
+        Map result  =   new HashMap<>();
+        result.put("activeUser", activeUserBean.getActiveUser());
+        result.put("friendship", friendship);
+        
+        ServletUtils.jsonResponse(response, result);
     }
     
     /**
@@ -100,8 +109,7 @@ public class ProfileServlet extends HttpServlet
     throws ServletException, IOException 
     {
         List<Friends> friends   =   friendsBean.getUsersFriends(reqUser);
-        request.setAttribute("friendList", friends);
-        request.getRequestDispatcher("/views/user/profile/friends.jsp").forward(request, response);
+        ServletUtils.jsonResponse(response, friends);
     }
         
     /**
@@ -113,10 +121,8 @@ public class ProfileServlet extends HttpServlet
     throws ServletException, IOException 
     {
         if(!activeUserBean.isActive() || !activeUserBean.getActiveUser().equals(reqUser))
-            response.sendRedirect(request.getContextPath() + "/error");
+            ServletUtils.jsonResponse(response, activeUserBean.getActiveUser());
         
-        else
-            request.getRequestDispatcher("/views/user/profile/settings.jsp").forward(request, response);
     }
     
     private void processSettingsSave(HttpServletRequest request, HttpServletResponse response) 
@@ -136,8 +142,7 @@ public class ProfileServlet extends HttpServlet
             result  =   new SimpleEntry(true, "Account settings have been saved");
         }
         
-        request.setAttribute("settingsResult", result);
-        request.getRequestDispatcher("/views/user/profile/settings.jsp").forward(request, response);
+        ServletUtils.jsonResponse(response, new ActionResponse(result.getValue(), result.getKey()));
     }
     
     @Override

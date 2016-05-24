@@ -62,10 +62,4 @@ public class ActionResponse
     {
         this.data = data;
     }
-    
-    public String toJSON()
-    {
-        Gson gObj   =   new Gson();
-        return gObj.toJson(this);
-    }
 }
