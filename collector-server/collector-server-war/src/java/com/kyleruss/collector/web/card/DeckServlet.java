@@ -9,6 +9,7 @@ package com.kyleruss.collector.web.card;
 import com.google.gson.Gson;
 import com.kyleruss.collector.ejb.entity.Cards;
 import com.kyleruss.collector.ejb.entity.Decks;
+import com.kyleruss.collector.ejb.entity.Users;
 import com.kyleruss.collector.ejb.entityfac.ActiveUserBean;
 import com.kyleruss.collector.ejb.entityfac.CardsFacade;
 import com.kyleruss.collector.ejb.entityfac.DeckCardsFacade;
@@ -51,15 +52,16 @@ public class DeckServlet extends HttpServlet
     
     private void getDeckList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        
+        Users activeUser    =   activeUserBean.getActiveUser();
+        List<Decks> decks   =   decksFacade.getDecksForUser(activeUser);
+        ServletUtils.jsonResponse(response, decks);
     }
     
     private void getDeck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
         int deckID  =   Integer.parseInt(request.getParameter("deck_id"));
         Decks deck  =   decksFacade.find(deckID);
-        
-        
+        ServletUtils.jsonResponse(response, deck);
     }
 
     /**
