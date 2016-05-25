@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "DeckServlet", urlPatterns = {"/DeckServlet"})
+@WebServlet(name = "DeckServlet", urlPatterns = {"/deck/list", "/deck/find", "/deck/edit", "/deck/remove", "/deck/add", "/deck/list/add"})
 public class DeckServlet extends HttpServlet 
 {
     
@@ -48,7 +48,12 @@ public class DeckServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
+        String path =   request.getServletPath();
+        if(path.equals("/deck/list"))
+            getDeckList(request, response);
         
+        else if(path.equals("/deck"))
+            getDeck(request, response);
     }
     
     private void getDeckList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
@@ -65,6 +70,7 @@ public class DeckServlet extends HttpServlet
         ServletUtils.jsonResponse(response, deck);
     }
 
+    
     /**
      * @param request servlet request
      * @param response servlet response
@@ -74,7 +80,24 @@ public class DeckServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        
+        String path =   request.getServletPath();
+        switch (path)
+        {
+            case "/deck/edit":
+                editDeck(request, response);
+                break;
+            case "/deck/add":
+                addDeck(request, response);
+                break;
+            case "/deck/remove":
+                removeDeck(request, response);
+                break;
+            case "/deck/list/add":
+                addCardsToDeck(request, response);
+                break;
+            default:
+                break;
+        }
     }
     
     private void editDeck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
