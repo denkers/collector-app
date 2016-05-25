@@ -23,6 +23,7 @@ public class LoginActivity extends Activity
         String username         =   usernameView.getText().toString();
         String password         =   passwordView.getText().toString();
 
+
         Toast.makeText(getApplicationContext(), "username: " + username + " pass: " + password, Toast.LENGTH_SHORT).show();
     }
 }
