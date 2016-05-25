@@ -1,20 +1,21 @@
 package com.kyleruss.collector.mobile.comms;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class HTTPAsync
+public class ServiceRequest
 {
     private String url;
     private Map params;
 
-    public HTTPAsync()
+    public ServiceRequest()
     {
         url     =   "";
         params  =   new HashMap();
     }
 
-    public HTTPAsync(String url, Map params)
+    public ServiceRequest(String url, Map params)
     {
         this.url    =   url;
         this.params =   params;
