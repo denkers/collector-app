@@ -1,6 +1,7 @@
 package com.kyleruss.collector.mobile;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,12 @@ public class LoginActivity extends Activity
         request.addParam("login_password", password);
         LoginServicer servicer  =   new LoginServicer();
         servicer.execute(request);
+    }
+
+    public void showRegister(View v)
+    {
+        Intent intent   =   new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     private class LoginServicer extends HTTPAsync

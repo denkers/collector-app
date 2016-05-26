@@ -37,7 +37,8 @@
         android:id="@+id/registerBtn"
         android:src="@drawable/registerbtn"
         android:layout_below="@+id/loginBtn"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="showRegister"/>
 
     <LinearLayout
         android:orientation="vertical"
