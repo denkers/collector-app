@@ -27,7 +27,7 @@ public class LoginActivity extends Activity
         String password         =   passwordView.getText().toString();
 
 
-        ServiceRequest request  =   new ServiceRequest("http://192.168.1.68:34918/collector/user/login", false);
+        ServiceRequest request  =   new ServiceRequest(Consts.ROOT_URL + "user/login", false);
         request.addParam("login_username", username);
         request.addParam("login_password", password);
         LoginServicer servicer  =   new LoginServicer();
