@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kyleruss.collector.mobile.comms.HTTPAsync;
+import com.kyleruss.collector.mobile.comms.ServiceRequest;
+
 public class LoginActivity extends Activity
 {
     @Override
@@ -24,6 +27,19 @@ public class LoginActivity extends Activity
         String password         =   passwordView.getText().toString();
 
 
-        Toast.makeText(getApplicationContext(), "username: " + username + " pass: " + password, Toast.LENGTH_SHORT).show();
+        ServiceRequest request  =   new ServiceRequest("http://192.168.1.68:34918/collector/user/login", false);
+        request.addParam("login_username", username);
+        request.addParam("login_password", password);
+        LoginServicer servicer  =   new LoginServicer();
+        servicer.execute(request);
+    }
+
+    private class LoginServicer extends HTTPAsync
+    {
+        @Override
+        protected void onPostExecute(String response)
+        {
+            System.out.println(response);
+        }
     }
 }
