@@ -19,6 +19,7 @@
         android:layout_marginTop="38dp"
         android:src="@drawable/logolg" />
 
+    <!-- LOGIN CONTROL -->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,8 +27,10 @@
         android:src="@drawable/loginbtn"
         android:layout_marginTop="34dp"
         android:layout_below="@+id/rememberPassCheck"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="attemptLogin"/>
 
+    <!-- REGISTER LAUNCH CONTROL -->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,8 +38,6 @@
         android:src="@drawable/registerbtn"
         android:layout_below="@+id/loginBtn"
         android:layout_centerHorizontal="true" />
-
-
 
     <LinearLayout
         android:orientation="vertical"
