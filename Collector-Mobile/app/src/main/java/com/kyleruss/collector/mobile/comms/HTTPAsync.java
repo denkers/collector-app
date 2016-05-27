@@ -37,7 +37,7 @@ public abstract class HTTPAsync extends AsyncTask<ServiceRequest, Void, String>
 
     private void writeRequest(HttpURLConnection conn, String params) throws IOException
     {
-        OutputStreamWriter writer   =   new OutputStreamWriter(conn.getOutputStream(), "UTF-8   ");
+        OutputStreamWriter writer   =   new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
         writer.write(params);
         writer.flush();
         writer.close();
