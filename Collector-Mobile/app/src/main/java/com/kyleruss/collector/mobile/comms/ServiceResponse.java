@@ -5,6 +5,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,9 +54,12 @@ public class ServiceResponse
         TextView textView       =   (TextView) layout.findViewById(R.id.stoast_text);
         textView.setText(message);
 
+        ImageView imageView     =   (ImageView) layout.findViewById(R.id.stoast_icon);
+        imageView.setImageResource(status? R.drawable.successicon : R.drawable.failicon);
+
         Toast toast =   new Toast(activity.getApplicationContext());
-        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
     }

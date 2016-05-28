@@ -53,8 +53,10 @@ public class RegisterActivity extends Activity
         protected void onPostExecute(String response)
         {
             ServiceResponse serviceResponse =   getServiceResponse(response);
-            ImageView registerControl   =   (ImageView) findViewById(R.id.registerAttemptBtn);
+            ImageView registerControl       =   (ImageView) findViewById(R.id.registerAttemptBtn);
             hideServicingSpinner(registerControl, R.drawable.registerbtn);
+            serviceResponse.showToastResponse(RegisterActivity.this);
+            finish();
         }
     }
 }
