@@ -1,5 +1,15 @@
 package com.kyleruss.collector.mobile.comms;
 
+import android.app.Activity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.kyleruss.collector.mobile.R;
+
 public class ServiceResponse
 {
     private boolean status;
@@ -34,5 +44,19 @@ public class ServiceResponse
     public void setStatus(boolean status)
     {
         this.status =   status;
+    }
+
+    public void showToastResponse(Activity activity)
+    {
+        LayoutInflater inflater =   activity.getLayoutInflater();
+        View layout             =   inflater.inflate(R.layout.toast_layout, (ViewGroup) activity.findViewById(R.id.stoast_layout));
+        TextView textView       =   (TextView) layout.findViewById(R.id.stoast_text);
+        textView.setText(message);
+
+        Toast toast =   new Toast(activity.getApplicationContext());
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }

@@ -80,7 +80,7 @@ public abstract class HTTPAsync extends AsyncTask<ServiceRequest, Void, String>
         }
     }
 
-    public void showServicingSpinner(ImageView v)
+    public static void showServicingSpinner(ImageView v)
     {
         v.setImageResource(android.R.color.transparent);
         v.setBackgroundResource(R.drawable.spinner_animation);
@@ -88,7 +88,7 @@ public abstract class HTTPAsync extends AsyncTask<ServiceRequest, Void, String>
         animation.start();
     }
 
-    public void hideServicingSpinner(ImageView v, int prevDrawable)
+    public static void hideServicingSpinner(ImageView v, int prevDrawable)
     {
         AnimationDrawable animation =   (AnimationDrawable) v.getBackground();
         animation.stop();
@@ -106,7 +106,6 @@ public abstract class HTTPAsync extends AsyncTask<ServiceRequest, Void, String>
 
             writeRequest(connection, request.prepareParams());
 
-            Thread.sleep(3000);
             return getResponse(connection);
         }
 

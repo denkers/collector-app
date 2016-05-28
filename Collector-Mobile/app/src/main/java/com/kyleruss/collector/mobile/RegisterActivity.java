@@ -46,7 +46,7 @@ public class RegisterActivity extends Activity
         protected void onPreExecute()
         {
             ImageView registerControl   =   (ImageView) findViewById(R.id.registerAttemptBtn);
-            registerControl.setImageResource(R.drawable.spinner);
+            showServicingSpinner(registerControl);
         }
 
         @Override
@@ -54,7 +54,7 @@ public class RegisterActivity extends Activity
         {
             ServiceResponse serviceResponse =   getServiceResponse(response);
             ImageView registerControl   =   (ImageView) findViewById(R.id.registerAttemptBtn);
-            registerControl.setImageResource(R.drawable.registerbtn);
+            hideServicingSpinner(registerControl, R.drawable.registerbtn);
         }
     }
 }

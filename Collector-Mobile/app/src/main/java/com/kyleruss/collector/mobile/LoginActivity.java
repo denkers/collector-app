@@ -61,6 +61,7 @@ public class LoginActivity extends Activity
             System.out.println("status: " + serviceResponse.getStatus() + " message: " + serviceResponse.getMessage());
             ImageView loginControl      =   (ImageView) findViewById(R.id.loginBtn);
             hideServicingSpinner(loginControl, R.drawable.loginbtn);
+            serviceResponse.showToastResponse(LoginActivity.this);
         }
     }
 }
