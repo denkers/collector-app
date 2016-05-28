@@ -6,6 +6,8 @@ import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.kyleruss.collector.mobile.comms.HTTPAsync;
 import com.kyleruss.collector.mobile.comms.ServiceRequest;
 import com.kyleruss.collector.mobile.comms.ServiceResponse;
+import com.kyleruss.collector.mobile.user.UserCredentialsManager;
 
 public class LoginActivity extends Activity
 {
@@ -21,6 +24,7 @@ public class LoginActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        initSavedCredentials();
     }
 
     public void attemptLogin(View v)
@@ -44,6 +48,31 @@ public class LoginActivity extends Activity
         startActivity(intent);
     }
 
+    public void initSavedCredentials()
+    {
+        String[] savedCredentials   =   UserCredentialsManager.getSavedCredentials(this);
+        String username             =   savedCredentials[0];
+        String password             =   savedCredentials[1];
+
+        ((EditText) findViewById(R.id.userField)).setText(username);
+        ((EditText) findViewById(R.id.passField)).setText(password);
+
+        if(!username.equals("") && !password.equals(""))
+            ((CheckBox) findViewById(R.id.rememberPassCheck)).setChecked(true);
+    }
+
+    public void saveCredentials()
+    {
+        if(((CheckBox) findViewById(R.id.rememberPassCheck)).isChecked())
+        {
+            String username     =   ((EditText) findViewById(R.id.userField)).getText().toString();
+            String password     =   ((EditText) findViewById(R.id.passField)).getText().toString();
+            UserCredentialsManager.saveCredentials(username, password, this);
+        }
+
+        else UserCredentialsManager.removeCredentials(this);
+    }
+
     private class LoginServicer extends HTTPAsync
     {
         @Override
@@ -59,6 +88,9 @@ public class LoginActivity extends Activity
         {
             ServiceResponse serviceResponse =   getServiceResponse(response);
             System.out.println("status: " + serviceResponse.getStatus() + " message: " + serviceResponse.getMessage());
+            if(serviceResponse.getStatus())
+                saveCredentials();
+
             ImageView loginControl      =   (ImageView) findViewById(R.id.loginBtn);
             hideServicingSpinner(loginControl, R.drawable.loginbtn);
             serviceResponse.showToastResponse(LoginActivity.this);
