@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".user.LoginActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,8 +24,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
-            android:parentActivityName=".LoginActivity">
+            android:name=".user.RegisterActivity"
+            android:parentActivityName=".user.LoginActivity">
         </activity>
     </application>
 
