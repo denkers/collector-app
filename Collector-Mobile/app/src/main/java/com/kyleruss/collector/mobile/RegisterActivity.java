@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.kyleruss.collector.mobile.comms.HTTPAsync;
 import com.kyleruss.collector.mobile.comms.ServiceRequest;
+import com.kyleruss.collector.mobile.comms.ServiceResponse;
 
 public class RegisterActivity extends Activity
 {
@@ -40,11 +42,19 @@ public class RegisterActivity extends Activity
 
     private class RegisterServicer extends HTTPAsync
     {
+        @Override
+        protected void onPreExecute()
+        {
+            ImageView registerControl   =   (ImageView) findViewById(R.id.registerAttemptBtn);
+            registerControl.setImageResource(R.drawable.spinner);
+        }
 
         @Override
         protected void onPostExecute(String response)
         {
-            System.out.println(response);
+            ServiceResponse serviceResponse =   getServiceResponse(response);
+            ImageView registerControl   =   (ImageView) findViewById(R.id.registerAttemptBtn);
+            registerControl.setImageResource(R.drawable.registerbtn);
         }
     }
 }

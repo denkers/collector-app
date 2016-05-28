@@ -1,6 +1,11 @@
 package com.kyleruss.collector.mobile.comms;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.kyleruss.collector.mobile.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,6 +80,22 @@ public abstract class HTTPAsync extends AsyncTask<ServiceRequest, Void, String>
         }
     }
 
+    public void showServicingSpinner(ImageView v)
+    {
+        v.setImageResource(android.R.color.transparent);
+        v.setBackgroundResource(R.drawable.spinner_animation);
+        AnimationDrawable animation =   (AnimationDrawable) v.getBackground();
+        animation.start();
+    }
+
+    public void hideServicingSpinner(ImageView v, int prevDrawable)
+    {
+        AnimationDrawable animation =   (AnimationDrawable) v.getBackground();
+        animation.stop();
+        v.setBackgroundResource(android.R.color.transparent);
+        v.setImageResource(prevDrawable);
+    }
+
     @Override
     protected String doInBackground(ServiceRequest... requests)
     {
@@ -84,6 +105,8 @@ public abstract class HTTPAsync extends AsyncTask<ServiceRequest, Void, String>
             HttpURLConnection connection    =   request.getConnection();
 
             writeRequest(connection, request.prepareParams());
+
+            Thread.sleep(3000);
             return getResponse(connection);
         }
 

@@ -2,14 +2,17 @@ package com.kyleruss.collector.mobile;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kyleruss.collector.mobile.comms.HTTPAsync;
 import com.kyleruss.collector.mobile.comms.ServiceRequest;
+import com.kyleruss.collector.mobile.comms.ServiceResponse;
 
 public class LoginActivity extends Activity
 {
@@ -44,9 +47,20 @@ public class LoginActivity extends Activity
     private class LoginServicer extends HTTPAsync
     {
         @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            ImageView loginControl  =   (ImageView) findViewById(R.id.loginBtn);
+            showServicingSpinner(loginControl);
+        }
+
+        @Override
         protected void onPostExecute(String response)
         {
-            System.out.println(response);
+            ServiceResponse serviceResponse =   getServiceResponse(response);
+            System.out.println("status: " + serviceResponse.getStatus() + " message: " + serviceResponse.getMessage());
+            ImageView loginControl      =   (ImageView) findViewById(R.id.loginBtn);
+            hideServicingSpinner(loginControl, R.drawable.loginbtn);
         }
     }
 }
