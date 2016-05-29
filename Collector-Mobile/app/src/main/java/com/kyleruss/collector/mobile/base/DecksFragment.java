@@ -17,6 +17,7 @@ public class DecksFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        getActivity().getActionBar().setTitle("Decks");
         return inflater.inflate(R.layout.fragment_decks, container, false);
     }
 }

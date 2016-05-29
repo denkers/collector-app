@@ -16,6 +16,7 @@ public class SettingsFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        getActivity().getActionBar().setTitle("Settings");
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 }
