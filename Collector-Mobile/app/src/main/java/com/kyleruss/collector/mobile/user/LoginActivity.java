@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.kyleruss.collector.mobile.Consts;
 import com.kyleruss.collector.mobile.R;
+import com.kyleruss.collector.mobile.base.HomeActivity;
 import com.kyleruss.collector.mobile.comms.HTTPAsync;
 import com.kyleruss.collector.mobile.comms.ServiceRequest;
 import com.kyleruss.collector.mobile.comms.ServiceResponse;
@@ -86,12 +87,17 @@ public class LoginActivity extends Activity
         {
             ServiceResponse serviceResponse =   getServiceResponse(response);
             System.out.println("status: " + serviceResponse.getStatus() + " message: " + serviceResponse.getMessage());
-            if(serviceResponse.getStatus())
-                saveCredentials();
 
             ImageView loginControl      =   (ImageView) findViewById(R.id.loginBtn);
             hideServicingSpinner(loginControl, R.drawable.loginbtn);
             serviceResponse.showToastResponse(LoginActivity.this);
+
+            if(serviceResponse.getStatus())
+            {
+                saveCredentials();
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            }
+
         }
     }
 }

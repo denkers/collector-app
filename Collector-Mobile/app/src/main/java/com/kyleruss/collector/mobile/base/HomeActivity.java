@@ -47,10 +47,18 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
     @Override
     public void onNavigationDrawerItemSelected(int position)
     {
-        // update the main content by replacing fragments
+        Fragment fragment   =   null;
+        switch(position)
+        {
+            case 0: fragment = new ProfileFragment(); break;
+            case 1: fragment = new FriendsFragment(); break;
+            case 2: fragment = new SettingsFragment(); break;
+            case 3: fragment = new DecksFragment(); break;
+        }
+
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, fragment)
                 .commit();
     }
 
@@ -106,8 +114,8 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View rootView = null;//inflater.inflate(R.layout.fragment_home, container, false);
-            return null;//rootView;
+            View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+            return rootView;
         }
 
         @Override
