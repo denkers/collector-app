@@ -23,4 +23,91 @@
         android:drawableLeft="@drawable/settingsic"
         android:drawablePadding="15dp"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usernameFieldLayout"
+        android:orientation="horizontal"
+        android:id="@+id/passwordFieldLayout"
+        android:layout_marginTop="100dp"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Password"
+            android:id="@+id/passwordDesc"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:hint="6-18 characters"
+            android:inputType="textPassword"
+            android:fontFamily="sans-"
+            android:id="@+id/regPasswordField"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passwordFieldLayout"
+        android:orientation="horizontal"
+        android:id="@+id/pictureFieldLayout"
+        android:layout_marginTop="10dp"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Picture"
+            android:id="@+id/pictureFieldDesc"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:hint="Enter a URL for your picture"
+            android:inputType="textPassword"
+            android:fontFamily="sans-serif"
+            android:id="@+id/pictureField"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pictureFieldLayout"
+        android:orientation="horizontal"
+        android:id="@+id/emailFieldLayout"
+        android:layout_marginTop="10dp"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Email"
+            android:id="@+id/emailDesc" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:hint="Enter a valid email"
+            android:inputType="text"
+            android:fontFamily="sans-serif"
+            android:id="@+id/regEmailField"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:src="@drawable/savebtn"
+        android:layout_below="@+id/emailFieldLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="79dp" />
+
 </RelativeLayout>
