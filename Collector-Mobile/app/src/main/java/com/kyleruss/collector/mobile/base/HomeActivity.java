@@ -1,3 +1,9 @@
+//-------------------------------------------
+//  KYLE RUSSELL
+//  AUT UNIVERSITY 2016
+//  https://github.com/denkers/collector-app
+//-------------------------------------------
+
 package com.kyleruss.collector.mobile.base;
 
 import android.app.Activity;
@@ -54,9 +60,12 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
             case 1: fragment = new FriendsFragment(); break;
             case 2: fragment = new SettingsFragment(); break;
             case 3: fragment = new DecksFragment(); break;
+            case 4: fragment = new CardsFragment(); break;
         }
 
         FragmentManager fragmentManager = getFragmentManager();
+        System.out.println("FRAGMENT MANAGER: " + fragmentManager == null);
+
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();

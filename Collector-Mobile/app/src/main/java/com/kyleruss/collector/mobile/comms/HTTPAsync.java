@@ -1,3 +1,9 @@
+//-------------------------------------------
+//  KYLE RUSSELL
+//  AUT UNIVERSITY 2016
+//  https://github.com/denkers/collector-app
+//-------------------------------------------
+
 package com.kyleruss.collector.mobile.comms;
 
 import android.graphics.drawable.AnimationDrawable;

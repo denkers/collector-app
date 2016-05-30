@@ -21,6 +21,7 @@
     <string name="title_section2">Friends</string>
     <string name="title_section3">Settings</string>
     <string name="title_section4">Decks</string>
+    <string name="title_section5">Cards</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

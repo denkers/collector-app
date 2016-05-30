@@ -1,3 +1,9 @@
+//-------------------------------------------
+//  KYLE RUSSELL
+//  AUT UNIVERSITY 2016
+//  https://github.com/denkers/collector-app
+//-------------------------------------------
+
 package com.kyleruss.collector.mobile.base;
 
 import android.app.Activity;
@@ -42,6 +48,7 @@ public class NavMenuAdapter extends ArrayAdapter<String>
             case 1: resource = R.drawable.usersicon; break;
             case 2: resource = R.drawable.settings; break;
             case 3: resource = R.drawable.classesicon; break;
+            case 4: resource = R.drawable.classesicon; break;
         }
 
         if(resource != -1)
