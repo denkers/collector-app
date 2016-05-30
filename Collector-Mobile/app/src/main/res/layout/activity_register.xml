@@ -35,15 +35,17 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.6"
             android:text="Username"
             android:id="@+id/usernameDesc"
-            android:focusableInTouchMode="false" />
+            android:focusableInTouchMode="false"
+            android:drawableLeft="@drawable/user"
+            android:drawablePadding="5dp"/>
 
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_weight="1.4"
             android:hint="3-16 characters"
             android:inputType="text"
             android:id="@+id/regUsernameField"/>
@@ -61,14 +63,16 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.6"
             android:text="Password"
-            android:id="@+id/passwordDesc"/>
+            android:id="@+id/passwordDesc"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/passwordlocksm"/>
 
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_weight="1.4"
             android:hint="6-18 characters"
             android:inputType="textPassword"
             android:fontFamily="sans-"
@@ -87,14 +91,16 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.6"
             android:text="Confirm"
-            android:id="@+id/rePasswordDesc"/>
+            android:id="@+id/rePasswordDesc"
+            android:drawableLeft="@drawable/tick"
+            android:drawablePadding="5dp"/>
 
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_weight="1.4"
             android:hint="Re-enter password"
             android:inputType="textPassword"
             android:fontFamily="sans-serif"
@@ -113,14 +119,16 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.6"
             android:text="Email"
-            android:id="@+id/emailDesc" />
+            android:id="@+id/emailDesc"
+            android:drawableLeft="@drawable/emailicon"
+            android:drawablePadding="5dp"/>
 
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_weight="1.4"
             android:hint="Enter a valid email"
             android:inputType="text"
             android:fontFamily="sans-serif"
