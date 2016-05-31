@@ -12,9 +12,11 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kyleruss.collector.mobile.R;
+import com.kyleruss.collector.mobile.comms.ImageAsync;
 import com.kyleruss.collector.mobile.record.User;
 import com.kyleruss.collector.mobile.user.ActiveUser;
 
@@ -39,6 +41,10 @@ public class ProfileFragment extends Fragment
             DateFormat formatter    =   new SimpleDateFormat("dd-MM-yyyy");
             String formattedDate    =   formatter.format(activeUser.getRegisterDate());
             ((TextView) view.findViewById(R.id.userRegisterDateText)).setText(formattedDate);
+
+            ImageView profileImageView  =   (ImageView) view.findViewById(R.id.profilePicture);
+            ImageAsync imageAsync       =   new ImageAsync(profileImageView);
+            imageAsync.execute(activeUser.getPicture());
         }
 
         return view;
