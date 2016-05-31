@@ -56,23 +56,28 @@ public abstract class HTTPAsync extends AsyncTask<ServiceRequest, Void, String>
 
     protected ServiceResponse getServiceResponse(String response)
     {
+        ServiceResponse serviceResponse =   null;
+
         try
         {
             JSONObject jsonObject   =   new JSONObject(response);
             boolean status          =   jsonObject.getBoolean("actionStatus");
             String message          =   jsonObject.getString("message");
+            serviceResponse         =   new ServiceResponse(message, status);
 
-            return new ServiceResponse(message, status);
+            JSONObject data         =   jsonObject.getJSONObject("data");
+            serviceResponse.setData(data);
         }
 
         catch(JSONException e)
         {
             System.out.println(e.getMessage());
-            return null;
         }
+
+        return serviceResponse;
     }
 
-    protected JSONObject getJSONResult(String response)
+    public static JSONObject getJSONResult(String response)
     {
         try
         {

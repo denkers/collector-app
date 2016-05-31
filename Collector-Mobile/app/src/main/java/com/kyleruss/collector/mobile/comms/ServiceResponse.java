@@ -17,10 +17,13 @@ import android.widget.Toast;
 
 import com.kyleruss.collector.mobile.R;
 
+import org.json.JSONObject;
+
 public class ServiceResponse
 {
     private boolean status;
     private String message;
+    private JSONObject data;
 
     public ServiceResponse()
     {
@@ -51,6 +54,16 @@ public class ServiceResponse
     public void setStatus(boolean status)
     {
         this.status =   status;
+    }
+
+    public JSONObject getData()
+    {
+        return data;
+    }
+
+    public void setData(JSONObject data)
+    {
+        this.data   =   data;
     }
 
     public void showToastResponse(Activity activity)

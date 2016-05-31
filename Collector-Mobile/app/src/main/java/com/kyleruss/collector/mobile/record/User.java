@@ -1,7 +1,11 @@
 package com.kyleruss.collector.mobile.record;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User implements RecordTranslator<User>
@@ -78,7 +82,37 @@ public class User implements RecordTranslator<User>
     @Override
     public User mapToRecord(JSONObject obj)
     {
-        return null;
+        try
+        {
+            User user       =   new User();
+            user.setUsername(obj.getString("username"));
+            user.setPassword(obj.getString("password"));
+            user.setEmail(obj.getString("email"));
+            user.setPicture(obj.getString("picture"));
+
+            if(obj.has("country"))
+                user.setCountry(obj.getString("country"));
+
+            DateFormat formatter    =   new SimpleDateFormat("MMMM d, yyyy h:m:s a");
+
+            try
+            {
+                user.setRegisterDate((formatter.parse(obj.getString("registerDate"))));
+            }
+
+            catch(ParseException e)
+            {
+                e.printStackTrace();
+            }
+
+            return user;
+        }
+
+        catch(JSONException e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override

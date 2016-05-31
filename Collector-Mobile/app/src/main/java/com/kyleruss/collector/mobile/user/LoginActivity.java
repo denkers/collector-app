@@ -21,6 +21,9 @@ import com.kyleruss.collector.mobile.base.HomeActivity;
 import com.kyleruss.collector.mobile.comms.HTTPAsync;
 import com.kyleruss.collector.mobile.comms.ServiceRequest;
 import com.kyleruss.collector.mobile.comms.ServiceResponse;
+import com.kyleruss.collector.mobile.record.User;
+
+import org.json.JSONObject;
 
 public class LoginActivity extends Activity
 {
@@ -92,7 +95,6 @@ public class LoginActivity extends Activity
         protected void onPostExecute(String response)
         {
             ServiceResponse serviceResponse =   getServiceResponse(response);
-            System.out.println("status: " + serviceResponse.getStatus() + " message: " + serviceResponse.getMessage());
 
             ImageView loginControl      =   (ImageView) findViewById(R.id.loginBtn);
             hideServicingSpinner(loginControl, R.drawable.loginbtn);
@@ -101,6 +103,8 @@ public class LoginActivity extends Activity
             if(serviceResponse.getStatus())
             {
                 saveCredentials();
+                User user   =   new User().mapToRecord(serviceResponse.getData());
+                ActiveUser.getInstance().setUser(user);
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
 
