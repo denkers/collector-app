@@ -115,7 +115,8 @@ public abstract class HTTPAsync extends AsyncTask<ServiceRequest, Void, String>
             ServiceRequest request          =   requests[0];
             HttpURLConnection connection    =   request.getConnection();
 
-            writeRequest(connection, request.prepareParams());
+            if(!request.isGet())
+                writeRequest(connection, request.prepareParams());
 
             return getResponse(connection);
         }

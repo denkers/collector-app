@@ -83,7 +83,8 @@ public class ServiceRequest
 
     public HttpURLConnection getConnection() throws MalformedURLException, IOException
     {
-        URL urlObj              =   new URL(url);
+        String preparedURL      =   isGet? (url + "?" + prepareParams()) : url;
+        URL urlObj              =   new URL(preparedURL);
         HttpURLConnection conn  =   (HttpURLConnection) urlObj.openConnection();
 
         conn.setDoInput(true);
