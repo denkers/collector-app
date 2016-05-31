@@ -9,6 +9,8 @@ public class DeckCard implements RecordTranslator<DeckCard>
     private Deck deck;
     private int position;
 
+    public DeckCard() {}
+
     public Card getCard()
     {
         return card;
