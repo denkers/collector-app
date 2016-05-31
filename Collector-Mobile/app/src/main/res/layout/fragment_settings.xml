@@ -113,7 +113,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
+        android:id="@+id/settingsSaveBtn"
         android:src="@drawable/savebtn"
         android:layout_below="@+id/emailFieldLayout"
         android:layout_centerHorizontal="true"
