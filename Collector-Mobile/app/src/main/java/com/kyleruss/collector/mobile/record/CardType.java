@@ -1,10 +1,14 @@
 package com.kyleruss.collector.mobile.record;
 
-public class CardType
+import org.json.JSONObject;
+
+public class CardType implements RecordTranslator<CardType>
 {
     private int id;
     private String name;
     private String description;
+
+    public CardType() {}
 
     public int getId()
     {
@@ -34,5 +38,17 @@ public class CardType
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    @Override
+    public CardType mapToRecord(JSONObject obj)
+    {
+        return null;
+    }
+
+    @Override
+    public JSONObject serializeRecord()
+    {
+        return null;
     }
 }

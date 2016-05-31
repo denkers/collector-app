@@ -11,6 +11,8 @@ public class Friendship implements RecordTranslator<Friendship>
     private User friendB;
     private Date friendshipDate;
 
+    public Friendship() {}
+
     public int getId()
     {
         return id;

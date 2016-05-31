@@ -13,6 +13,8 @@ public class User implements RecordTranslator<User>
     private String country;
     private Date registerDate;
 
+    public User() {}
+
     public Date getRegisterDate()
     {
         return registerDate;
